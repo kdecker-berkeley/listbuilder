@@ -9,7 +9,8 @@
 #' To use flist, you have to specify the origin and destination id fields, as
 #' well as the "context" that defines the transformation. The "context" includes
 #' the CDW table that contains both id fields, and any conditions. Example
-#' context: table = \code{d_bio_relationship_mv}, condition = \code{relation_type_code %in% ("SF", "SM", "DF", "DM")}.
+#' context: \code{table = d_bio_relationship_mv},
+#' condition = \code{relation_type_code \%in\% c("SF", "SM", "DF", "DM"}.
 #' That would describe an output of IDs that are parents of the original ID list.
 #'
 #' @param savedlist a listbuilder list

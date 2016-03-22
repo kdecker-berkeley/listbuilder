@@ -33,4 +33,12 @@ converted to a new list of entities via the question "Who are the children of
 these entities?" And so on. \code{flist} is the general-purpose tool to make
 these conversions.
 }
+\details{
+To use flist, you have to specify the origin and destination id fields, as
+well as the "context" that defines the transformation. The "context" includes
+the CDW table that contains both id fields, and any conditions. Example
+context: \code{table = d_bio_relationship_mv},
+condition = \code{relation_type_code \%in\% c("SF", "SM", "DF", "DM"}.
+That would describe an output of IDs that are parents of the original ID list.
+}
 
