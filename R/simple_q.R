@@ -25,6 +25,7 @@ simple_q <- function(table, ..., id_field = "entity_id",
 }
 
 #' @rdname simple_q
+#' @export
 simple_q_ <- function(table, where,
                       id_field = "entity_id", id_type = "cads_id",
                       schema = "CDW",
