@@ -28,24 +28,12 @@ operator <- function(operator) {
 
 #' @rdname operate
 #' @export
-`%intersect%` <- function(block1, block2) operate(block1, block2, "intersect")
+`%and%` <- function(block1, block2) operate(block1, block2, "intersect")
 
 #' @rdname operate
 #' @export
-`%union%` <- function(block1, block2) operate(block1, block2, "union")
+`%or%` <- function(block1, block2) operate(block1, block2, "union")
 
 #' @rdname operate
 #' @export
 `%minus%` <- function(block1, block2) operate(block1, block2, "minus")
-
-#' @rdname operate
-#' @export
-"+.listbuilder" <- function(block1, block2) operate(block1, block2, "union")
-
-#' @rdname operate
-#' @export
-"*.listbuilder" <- function(block1, block2) operate(block1, block2, "intersect")
-
-#' @rdname operate
-#' @export
-"-.listbuilder" <- function(block1, block2) operate(block1, block2, "minus")
