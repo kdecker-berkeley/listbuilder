@@ -24,3 +24,17 @@ from {{{schema}}}.{{{table}}}
 where {{{where}}}
 {{/haswhere}}"
 }
+
+aggregate_q_template <- function() {
+"
+select {{{table}}}.{{{id_field}}} as {{{id_type}}}
+from {{{schema}}}.{{{table}}}
+{{#haswhere}}
+where {{{where}}}
+{{/haswhere}}
+group by {{{table}}}.{{{id_field}}}
+{{#hashaving}}
+having {{{having}}}
+{{/hashaving}}
+"
+}

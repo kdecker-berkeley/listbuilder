@@ -34,6 +34,31 @@ to_sql.simple_q <- function(lb) {
 
 #' @importFrom whisker whisker.render
 #' @export
+to_sql.aggregate_q <- function(lb) {
+    template <- aggregate_q_template()
+    haswhere <- length(lb$where) > 0
+    where <- paste(lb$where, collapse = " and ")
+    where <- unquote(where)
+
+    hashaving <- length(lb$having) > 0
+    having <- paste(lb$having, collapse = " and ")
+    having <- unquote(having)
+
+    whisker.render(template,
+                   data = list(table = lb$table,
+                               haswhere = haswhere,
+                               where = where,
+                               hashaving = hashaving,
+                               having = having,
+                               id_field = lb$id_field,
+                               id_type = lb$id_type,
+                               schema = lb$schema))
+}
+
+
+
+#' @importFrom whisker whisker.render
+#' @export
 to_sql_flist <- function(lb) {
     template <- flist_template()
     original_query <- to_sql(get_rhs(lb))
