@@ -31,7 +31,8 @@ simple_q_ <- function(table, where,
                       schema = "CDW",
                       env = parent.frame()) {
     where <- wherelist(where, env = env)
-    where <- lapply(where, function(x) r2sql((list(x))))
+    if (!is.null(where))
+        where <- lapply(where, function(x) r2sql(list(x)))
     x <- list(table = table, where = where,
               id_field = id_field, id_type = id_type,
               schema = schema)
