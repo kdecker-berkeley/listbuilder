@@ -5,10 +5,10 @@
 \alias{simple_q_}
 \title{Template for simple single-table queries.}
 \usage{
-simple_q(table, ..., id_field = "entity_id", id_type = "cads_id",
+simple_q(table, ..., id_field = "entity_id", id_type = "entity_id",
   schema = "CDW", env = parent.frame())
 
-simple_q_(table, where, id_field = "entity_id", id_type = "cads_id",
+simple_q_(table, where, id_field = "entity_id", id_type = "entity_id",
   schema = "CDW", env = parent.frame())
 }
 \arguments{

@@ -13,7 +13,7 @@
 #'
 #' @export
 aggregate_q_ <- function(table, where, having,
-                         id_field = "entity_id", id_type = "cads_id",
+                         id_field = "entity_id", id_type = "entity_id",
                          schema = "CDW",
                          env = parent.frame()) {
     where <- wherelist(where, env = env)

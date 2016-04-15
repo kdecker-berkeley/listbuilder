@@ -5,10 +5,10 @@
 \alias{flist_}
 \title{Convert a list of Ids to a new list of a possibly different type}
 \usage{
-flist(savedlist, table, from, to, id_type = "cads_id", ..., schema = "CDW",
-  env = parent.frame())
+flist(savedlist, table, from, to, id_type = "entity_id", ...,
+  schema = "CDW", env = parent.frame())
 
-flist_(savedlist, table, from, to, id_type = "cads_id", .dots,
+flist_(savedlist, table, from, to, id_type = "entity_id", .dots,
   schema = "CDW", env = parent.frame())
 }
 \arguments{

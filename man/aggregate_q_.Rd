@@ -5,7 +5,7 @@
 \title{Template for single-table aggregate queries}
 \usage{
 aggregate_q_(table, where, having, id_field = "entity_id",
-  id_type = "cads_id", schema = "CDW", env = parent.frame())
+  id_type = "entity_id", schema = "CDW", env = parent.frame())
 }
 \arguments{
 \item{table}{full name of the CDW table (eg d_entity_mv)}
