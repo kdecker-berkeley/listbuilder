@@ -23,7 +23,7 @@
 #'
 #' @importFrom pryr dots
 #' @export
-flist <- function(savedlist, table, from, to, id_type = "cads_id",
+flist <- function(savedlist, table, from, to, id_type = "entity_id",
                   ..., schema = "CDW", env = parent.frame()) {
     table <- deparse(partial_sub(substitute(table), env = env))
     table <- unquote(table)
@@ -40,7 +40,7 @@ flist <- function(savedlist, table, from, to, id_type = "cads_id",
 
 #' @rdname flist
 #' @export
-flist_ <- function(savedlist, table, from, to, id_type = "cads_id",
+flist_ <- function(savedlist, table, from, to, id_type = "entity_id",
                    .dots, schema = "CDW", env = parent.frame()) {
     where <- wherelist(.dots, env = env)
     where <- lapply(where, function(x) r2sql((list(x))))

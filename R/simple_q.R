@@ -16,7 +16,7 @@ unquote <- function(string) {
 #' @importFrom pryr dots
 #' @export
 simple_q <- function(table, ..., id_field = "entity_id",
-                     id_type = "cads_id", schema = "CDW",
+                     id_type = "entity_id", schema = "CDW",
                      env = parent.frame()) {
     table <- deparse(partial_sub(substitute(table), env = env))
     table <- unquote(table)
@@ -27,7 +27,7 @@ simple_q <- function(table, ..., id_field = "entity_id",
 #' @rdname simple_q
 #' @export
 simple_q_ <- function(table, where,
-                      id_field = "entity_id", id_type = "cads_id",
+                      id_field = "entity_id", id_type = "entity_id",
                       schema = "CDW",
                       env = parent.frame()) {
     where <- wherelist(where, env = env)
