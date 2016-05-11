@@ -12,7 +12,7 @@ operate <- function(block1, block2, operator) UseMethod("operate")
 operate.listbuilder <- function(block1, block2, operator) {
     if (!inherits(block2, "listbuilder")) stop("Operation not defined")
     assert_that(identical(get_id_type(block1), get_id_type(block2)))
-    operator <- operator(operator)
+    operator <- check_operator(operator)
 
     structure(list(lhs = block1,
                    rhs = block2,
@@ -21,7 +21,7 @@ operate.listbuilder <- function(block1, block2, operator) {
               class = "listbuilder")
 }
 
-operator <- function(operator) {
+check_operator <- function(operator) {
     stopifnot(operator %in% c("intersect", "union", "minus"))
     operator
 }
