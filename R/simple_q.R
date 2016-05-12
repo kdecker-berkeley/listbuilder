@@ -30,9 +30,8 @@ simple_q_ <- function(table, where,
                       id_field = "entity_id", id_type = "entity_id",
                       schema = "CDW",
                       env = parent.frame()) {
-    where <- wherelist(where, env = env)
-    if (!is.null(where))
-        where <- lapply(where, function(x) r2sql(list(x)))
+    where <- process_conditions(where, env = env)
+
     x <- list(table = table, where = where,
               id_field = id_field, id_type = id_type,
               schema = schema)

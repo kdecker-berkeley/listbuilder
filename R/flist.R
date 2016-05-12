@@ -42,8 +42,7 @@ flist <- function(savedlist, table, from, to, id_type = "entity_id",
 #' @export
 flist_ <- function(savedlist, table, from, to, id_type = "entity_id",
                    .dots, schema = "CDW", env = parent.frame()) {
-    where <- wherelist(.dots, env = env)
-    where <- lapply(where, function(x) r2sql((list(x))))
+    where <- process_conditions(.dots, env = env)
 
     structure(list(lhs = NULL,
                    rhs = savedlist,
