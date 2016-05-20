@@ -1,11 +1,11 @@
 Package: listbuilder
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.1
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Title: Prospecting tool
+Version: 0.1.2
+Author: Tarak Shah
+Maintainer: Tarak Shah <tarak_shah@berkeley.edu>
+Description: Create composable populations of entities from a database
+License: MIT + file LICENSE
 LazyData: TRUE
 RoxygenNote: 5.0.1
 Suggests: testthat
