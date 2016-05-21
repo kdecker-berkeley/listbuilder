@@ -1,7 +1,3 @@
-unquote <- function(string) {
-    gsub("\"", "", string)
-}
-
 #' Template for simple single-table queries.
 #'
 #' This functions provides a shorthand for queries of the form "select x from y where ..."
