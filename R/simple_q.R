@@ -26,10 +26,7 @@ simple_q_ <- function(table, where,
                       id_field = "entity_id", id_type = "entity_id",
                       schema = "CDW",
                       env = parent.frame()) {
-    where <- process_conditions(where, env = env)
-
-    x <- list(table = table, where = where,
-              id_field = id_field, id_type = id_type,
-              schema = schema)
-    structure(x, class = c("simple_q", "listbuilder"))
+    aggregate_q_(table = table, where = where, having = NULL,
+                 id_field = id_field, id_type = id_type, schema = schema,
+                 env = env)
 }
