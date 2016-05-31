@@ -1,11 +1,11 @@
 context("aggregate_q")
-
+x <- 1000
 agq <- aggregate_q_(table = "f_transaction_detail_mv",
-                    where = pryr::dots(alloc_school_code %in% ("HSB"),
-                                       between(giving_record_dt,
-                                               to_date(20140101L, "yyyymmdd"),
-                                               to_date(20141231L, "yyyymmdd"))),
-                    having = pryr::dots(sum(benefit_aog_credited_amt) >= 1000),
+                    where = lazyeval::lazy_dots(alloc_school_code %in% ("HSB"),
+                                                between(giving_record_dt,
+                                                        to_date(20140101L, "yyyymmdd"),
+                                                        to_date(20141231L, "yyyymmdd"))),
+                    having = lazyeval::lazy_dots(sum(benefit_aog_credited_amt) >= x),
                     id_field = "donor_entity_id_nbr",
                     id_type = "entity_id",
                     schema = "CDW")

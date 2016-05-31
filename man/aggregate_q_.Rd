@@ -4,19 +4,18 @@
 \alias{aggregate_q_}
 \title{Template for single-table aggregate queries}
 \usage{
-aggregate_q_(table, where, having, id_field = "entity_id",
-  id_type = "entity_id", schema = "CDW", env = parent.frame())
+aggregate_q_(table, id_field, id_type, where = NULL, having = NULL, schema)
 }
 \arguments{
 \item{table}{full name of the CDW table (eg d_entity_mv)}
 
-\item{where}{pre-aggregated filter conditions}
-
-\item{having}{post-aggregated filter conditions}
-
 \item{id_field}{the name of the id column in \code{table}}
 
 \item{id_type}{a text label for the type of id}
+
+\item{where}{pre-aggregated filter conditions}
+
+\item{having}{post-aggregated filter conditions}
 
 \item{schema}{the schema}
 

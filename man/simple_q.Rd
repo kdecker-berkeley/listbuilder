@@ -5,11 +5,9 @@
 \alias{simple_q_}
 \title{Template for simple single-table queries.}
 \usage{
-simple_q(table, ..., id_field = "entity_id", id_type = "entity_id",
-  schema = "CDW", env = parent.frame())
+simple_q(table, ..., id_field, id_type, schema)
 
-simple_q_(table, where, id_field = "entity_id", id_type = "entity_id",
-  schema = "CDW", env = parent.frame())
+simple_q_(table, where = NULL, id_field, id_type, schema)
 }
 \arguments{
 \item{table}{full name of the CDW table (eg d_entity_mv)}

@@ -9,24 +9,23 @@
 #' @param schema the schema
 #' @param env evaluation environment
 #'
-#' @importFrom pryr dots
 #' @export
-simple_q <- function(table, ..., id_field = "entity_id",
-                     id_type = "entity_id", schema = "CDW",
-                     env = parent.frame()) {
-    table <- deparse(partial_sub(substitute(table), env = env))
-    table <- unquote(table)
-    where <- pryr::dots(...)
-    simple_q_(table, where, id_field, id_type, schema, env)
+simple_q <- function(table, ..., id_field, id_type, schema) {
+    where <- prep_dots(...)
+    simple_q_(table = table,
+              where = where,
+              id_field = id_field,
+              id_type = id_type,
+              schema = schema)
 }
 
 #' @rdname simple_q
 #' @export
-simple_q_ <- function(table, where,
-                      id_field = "entity_id", id_type = "entity_id",
-                      schema = "CDW",
-                      env = parent.frame()) {
-    aggregate_q_(table = table, where = where, having = NULL,
-                 id_field = id_field, id_type = id_type, schema = schema,
-                 env = env)
+simple_q_ <- function(table, where = NULL, id_field, id_type, schema) {
+    aggregate_q_(table = table,
+                 where = where,
+                 having = NULL,
+                 id_field = id_field,
+                 id_type = id_type,
+                 schema = schema)
 }

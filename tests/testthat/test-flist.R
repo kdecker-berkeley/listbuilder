@@ -1,16 +1,18 @@
-context("aggregate_q")
+context("flist")
 
 query1 <- simple_q_("sf_entity_aog_summary_mv",
-                    pryr::dots(summary_aog_code == 'SHSB',
-                               raised_aog_amt > 0),
+                    list(~summary_aog_code == 'SHSB',
+                         ~raised_aog_amt > 0),
                     id_field = "entity_id",
                     id_type = "entity_id",
                     schema = "CDW")
 
-fq <- flist_(query1, table = "d_entity_mv",
-             from = "entity_id", to = "hh_corp_entity_id",
-             id_type = "entity_id", .dots = NULL,
-             schema = "CDW", env = parent.frame())
+fq <- flist_(query1,
+             table = "d_entity_mv",
+             from = "entity_id",
+             to = "hh_corp_entity_id",
+             id_type = "entity_id",
+             schema = "CDW")
 
 
 test_that("flist_ generates all expected components", {

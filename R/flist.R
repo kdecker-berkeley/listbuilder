@@ -17,32 +17,16 @@
 #' @param table the table within which the flist will happen
 #' @param from the origin ID field
 #' @param to the destination ID field
-#' @param ... any conditions, a set of boolean expressions
+#' @param id_type the id_type of the new listbuilder object
+#' @param where any pre-aggregation conditions (lazy_dots)
+#' @param having any post-aggregation conditions (lazy_dots)
 #' @param schema "CDW" by default, no need to change it
 #' @param env enviornment for evaluating table, from, to, and ...
-#'
-#' @importFrom pryr dots
 #' @export
-flist <- function(savedlist, table, from, to, id_type = "entity_id",
-                  ..., schema = "CDW", env = parent.frame()) {
-    table <- deparse(partial_sub(substitute(table), env = env))
-    table <- unquote(table)
-
-    from <- deparse(partial_sub(substitute(from), env = env))
-    from <- unquote(from)
-
-    to <- deparse(partial_sub(substitute(to), env = env))
-    to <- unquote(to)
-
-    where <- pryr::dots(...)
-    flist_(savedlist, table, from, to, id_type, where, schema, env)
-}
-
-#' @rdname flist
-#' @export
-flist_ <- function(savedlist, table, from, to, id_type = "entity_id",
-                   .dots, schema = "CDW", env = parent.frame()) {
-    where <- process_conditions(.dots, env = env)
+flist_ <- function(savedlist, table, from, to, id_type,
+                   where = NULL, having = NULL, schema) {
+    where <- process_conditions(where)
+    having <- process_conditions(having)
 
     structure(list(lhs = NULL,
                    rhs = savedlist,
@@ -52,6 +36,7 @@ flist_ <- function(savedlist, table, from, to, id_type = "entity_id",
                    to = to,
                    table = table,
                    where = where,
+                   having = having,
                    schema = schema),
               class = "listbuilder")
 }

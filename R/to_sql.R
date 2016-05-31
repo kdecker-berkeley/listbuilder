@@ -18,32 +18,6 @@ to_sql.listbuilder <- function(lb) {
 
 #' @importFrom whisker whisker.render
 #' @export
-to_sql.simple_q <- function(lb) {
-    # load the template
-    template <- simple_q_template()
-
-    # convert where conditions (R expressions) to SQL strings
-    where <- lb$where
-    if (!is.null(where))
-        where <- lapply(where, function(x) r2sql(list(x)))
-
-    haswhere <- length(where) > 0
-
-    where <- paste(where, collapse = " and ")
-    where <- unquote(where)
-
-    # render template
-    whisker.render(template,
-                   data = list(table = lb$table,
-                               haswhere = haswhere,
-                               where = where,
-                               id_field = lb$id_field,
-                               id_type = lb$id_type,
-                               schema = lb$schema))
-}
-
-#' @importFrom whisker whisker.render
-#' @export
 to_sql.aggregate_q <- function(lb) {
     # load template
     template <- aggregate_q_template()
@@ -51,7 +25,7 @@ to_sql.aggregate_q <- function(lb) {
     # convert where conditions to sql strings
     where <- lb$where
     if (!is.null(where))
-        where <- lapply(where, function(x) r2sql(list(x)))
+        where <- lapply(where, function(x) r2sql(x))
 
     haswhere <- length(where) > 0
 
@@ -61,7 +35,7 @@ to_sql.aggregate_q <- function(lb) {
     # convert having conditions into sql strings (note similarity to where conds)
     having <- lb$having
     if (!is.null(having))
-        having <- lapply(having, function(x) r2sql((list(x))))
+        having <- lapply(having, function(x) r2sql(x))
 
     hashaving <- length(having) > 0
     having <- paste(having, collapse = " and ")
@@ -93,11 +67,20 @@ to_sql_flist <- function(lb) {
     # convert where conditions to sql strings
     where <- lb$where
     if (!is.null(where))
-        where <- lapply(where, function(x) r2sql(list(x)))
+        where <- lapply(where, function(x) r2sql(x))
 
     haswhere <- length(where) > 0
     where <- paste(where, collapse = " and ")
     where <- unquote(where)
+
+    # convert having conditions to sql strings
+    having <- lb$having
+    if (!is.null(having))
+        having <- lapply(having, function(x) r2sql(x))
+
+    hashaving <- length(having) > 0
+    having <- paste(having, collapse = " and ")
+    having <- unquote(having)
 
     # render the template
     whisker.render(template,
@@ -108,6 +91,8 @@ to_sql_flist <- function(lb) {
                        to = lb$to,
                        haswhere = haswhere,
                        where = where,
+                       hashaving = hashaving,
+                       having = having,
                        original_query = original_query,
                        schema = lb$schema
                    ))

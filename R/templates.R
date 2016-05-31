@@ -8,6 +8,10 @@ where
 and
 {{/haswhere}}
 {{{from}}} in ({{{original_query}}})
+{{#hashaving}}
+group by {{{table}}}.{{{id_field}}}
+having {{{having}}}
+{{/hashaving}}
 "
 }
 
@@ -17,14 +21,6 @@ lb_compound_template <- function() {
 ({{{block2}}})"
 }
 
-simple_q_template <- function() {
-"select {{{table}}}.{{{id_field}}} as {{{id_type}}}
-from {{{schema}}}.{{{table}}}
-{{#haswhere}}
-where {{{where}}}
-{{/haswhere}}"
-}
-
 aggregate_q_template <- function() {
 "
 select {{{table}}}.{{{id_field}}} as {{{id_type}}}
@@ -32,8 +28,8 @@ from {{{schema}}}.{{{table}}}
 {{#haswhere}}
 where {{{where}}}
 {{/haswhere}}
-group by {{{table}}}.{{{id_field}}}
 {{#hashaving}}
+group by {{{table}}}.{{{id_field}}}
 having {{{having}}}
 {{/hashaving}}
 "
