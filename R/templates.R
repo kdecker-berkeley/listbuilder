@@ -16,7 +16,7 @@ having {{{having}}}
 }
 
 lb_compound_template <- function() {
-"({{{block1}}})
+"{{{block1}}}
 {{{operator}}}
 ({{{block2}}})"
 }
