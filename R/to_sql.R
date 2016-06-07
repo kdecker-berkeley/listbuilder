@@ -2,23 +2,27 @@
 #'
 #' @param obj the listbuilder object to be converted
 #' @export
-to_sql <- function(obj) UseMethod("to_sql")
+to_sql <- function(obj) {
+    id_type <- get_id_type(obj)
+    query <- as_sql(obj)
+    paste0("select distinct ", id_type, " from (",
+           query, ")")
+}
 
-#' @export
-to_sql.rawqry <- function(lb) {
+as_sql <- function(obj) UseMethod("as_sql")
+
+as_sql.rawqry <- function(lb) {
     as.character(lb$query)
 }
 
-#' @export
-to_sql.listbuilder <- function(lb) {
-    if (!is_atomic(lb)) return(to_sql_compound(lb))
-    if (is_flist(lb)) return(to_sql_flist(lb))
+as_sql.listbuilder <- function(lb) {
+    if (!is_atomic(lb)) return(as_sql_compound(lb))
+    if (is_flist(lb)) return(as_sql_flist(lb))
     stop("Don't know how to deal with atomic objects of class ", class(lb))
 }
 
 #' @importFrom whisker whisker.render
-#' @export
-to_sql.aggregate_q <- function(lb) {
+as_sql.aggregate_q <- function(lb) {
     # load template
     template <- aggregate_q_template()
 
@@ -56,13 +60,12 @@ to_sql.aggregate_q <- function(lb) {
 
 
 #' @importFrom whisker whisker.render
-#' @export
-to_sql_flist <- function(lb) {
+as_sql_flist <- function(lb) {
     # load template
     template <- flist_template()
 
     # the subquery to be flisted
-    original_query <- to_sql(get_rhs(lb))
+    original_query <- as_sql(get_rhs(lb))
 
     # convert where conditions to sql strings
     where <- lb$where
@@ -99,10 +102,10 @@ to_sql_flist <- function(lb) {
 }
 
 #' @importFrom whisker whisker.render
-to_sql_compound <- function(lb) {
+as_sql_compound <- function(lb) {
     operator <- get_operator(lb)
-    block1 <- to_sql(get_lhs(lb))
-    block2 <- to_sql(get_rhs(lb))
+    block1 <- as_sql(get_lhs(lb))
+    block2 <- as_sql(get_rhs(lb))
 
     template <- lb_compound_template()
     whisker.render(template,

@@ -16,9 +16,9 @@ having {{{having}}}
 }
 
 lb_compound_template <- function() {
-"{{{block1}}}
+"({{{block1}}}
 {{{operator}}}
-({{{block2}}})"
+{{{block2}}})"
 }
 
 aggregate_q_template <- function() {
