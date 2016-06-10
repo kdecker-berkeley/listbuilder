@@ -11,18 +11,24 @@ as.listbuilder.character <- function(x, id_type) {
 }
 
 #' @export
-print.listbuilder <- function(x) cat("Listbuilder object")
-
 print.listbuilder <- function(x) {
     id <- get_id_type(x)
     cat("Listbuilder object (type: ", id, ")\n", sep = "")
+    cat("=================================================", "\n")
     print_details(x)
 }
 
 print_details <- function(x) {
     if (!is_atomic(x)) {
         print_details(get_lhs(x))
+        cat("\n", toupper(get_operator(x)), "\n\n", sep = "")
         print_details(get_rhs(x))
+        return()
+    }
+
+    if (is_flist(x)) {
+        print_details(get_rhs(x))
+        cat(":", x$from, " --> ", x$to, " via ", x$table, "\n", sep = "")
         return()
     }
     conditions <- c(x$where, x$having)
@@ -33,22 +39,26 @@ print_details <- function(x) {
     vals <- vapply(conditions, expression_filter,
                    FUN.VALUE = character(1))
 
+    cat(":", x$table, ".", x$id_field, "\n", sep = "")
+
     for (i in seq_along(operators)) {
         op <- operators[[i]]
         field <- fields[[i]]
         val <- vals[[i]]
-        cat(field, ": ", val, sep = "")
+        if (op %in% c("%in%", "=="))
+            cat("    ", field, ": ", val, "\n", sep = "")
+        else cat("    ", field, "\n", sep = "")
     }
 }
 
 expression_op <- function(exp) {
-    as.character(as.list(exp)[[1]])
+    deparse(as.list(exp)[[1]])
 }
 
 expression_field <- function(exp) {
-    as.character(as.list(exp)[[2]])
+    deparse(as.list(exp)[[2]])
 }
 
 expression_filter <- function(exp) {
-    as.character(as.list(exp)[[3]])
+    deparse(as.list(exp)[[3]])
 }

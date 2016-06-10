@@ -5,5 +5,5 @@ is_atomic.listbuilder <- function(lb) {
 
 is_flist <- function(lb) UseMethod("is_flist")
 is_flist.listbuilder <- function(lb) {
-    get_operator(lb) == "flist"
+    any(get_operator(lb) == "flist")
 }
