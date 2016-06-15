@@ -1,5 +1,7 @@
 #' @importFrom getcdw get_cdw
 #' @export
+getcdw::get_cdw
+
 get_cdw.listbuilder <- function(lb, dsn = "CDW2", uid = NULL, pwd = NULL,
                                 stringsAsFactors = FALSE, ...) {
     query <- to_sql(lb)
