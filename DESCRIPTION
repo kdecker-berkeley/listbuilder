@@ -13,4 +13,5 @@ Imports: assertthat,
     dplyr,
     getcdw,
     whisker,
-    lazyeval
+    lazyeval,
+    jsonlite
