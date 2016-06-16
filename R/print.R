@@ -90,7 +90,7 @@ print.listbuilder <- function(lb, ...) {
     output <- gsub(",\\s*\n", "\n", output)
     output <- gsub("\n\n", "\n", output)
     output <- gsub("\n\\s+\n", "\n", output)
-    output <- gsub("    ", "|   ", output)
+    output <- gsub("    ", ".   ", output)
     cat(output)
     invisible(lb)
 }
