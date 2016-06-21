@@ -1,9 +1,3 @@
-get_table <- function(lb) lb$table
-get_id_field <- function(lb) if (is_flist(lb)) lb$to else lb$id_field
-get_schema <- function(lb) lb$schema
-get_where <- function(lb) lb$where
-get_having <- function(lb) lb$having
-
 stringify <- function(conds) {
     if (is.null(conds)) return("")
     vapply(lapply(conds, r2sql), as.character, FUN.VALUE = character(1))
