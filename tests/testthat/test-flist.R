@@ -1,8 +1,8 @@
 context("flist")
 
 query1 <- simple_q_("sf_entity_aog_summary_mv",
-                    list(~summary_aog_code == 'SHSB',
-                         ~raised_aog_amt > 0),
+                    list(quote(summary_aog_code == 'SHSB'),
+                         quote(raised_aog_amt > 0)),
                     id_field = "entity_id",
                     id_type = "entity_id",
                     schema = "CDW")
