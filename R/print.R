@@ -1,6 +1,6 @@
 stringify <- function(conds) {
     if (is.null(conds)) return("")
-    vapply(lapply(conds, r2sql), as.character, FUN.VALUE = character(1))
+    vapply(r2sql(conds), as.character, FUN.VALUE = character(1))
 }
 
 to_list <- function(lb) {
