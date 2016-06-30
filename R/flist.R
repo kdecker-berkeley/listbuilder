@@ -13,7 +13,7 @@
 #' condition = \code{relation_type_code \%in\% c("SF", "SM", "DF", "DM"}.
 #' That would describe an output of IDs that are parents of the original ID list.
 #'
-#' @param savedlist a listbuilder list
+#' @param savedlist a listbuilder list or report
 #' @param table the table within which the flist will happen
 #' @param from the origin ID field
 #' @param to the destination ID field
@@ -24,7 +24,11 @@
 #' @param env enviornment for evaluating table, from, to, and ...
 #' @export
 flist_ <- function(savedlist, table, from, to, id_type,
-                   where = NULL, having = NULL, schema) {
+                   where = NULL, having = NULL, schema) UseMethod("flist_")
+
+#' @export
+flist_.listbuilder <- function(savedlist, table, from, to, id_type,
+                               where = NULL, having = NULL, schema) {
     where <- process_conditions(where)
     having <- process_conditions(having)
 

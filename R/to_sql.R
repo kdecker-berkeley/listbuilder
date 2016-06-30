@@ -2,7 +2,10 @@
 #'
 #' @param obj the listbuilder object to be converted
 #' @export
-to_sql <- function(obj) {
+to_sql <- function(obj) UseMethod("to_sql")
+
+#' @export
+to_sql.listbuilder <- function(obj) {
     id_type <- get_id_type(obj)
     query <- as_sql(obj)
     paste0("select distinct ", id_type, " from (",

@@ -8,7 +8,7 @@ flist_(savedlist, table, from, to, id_type, where = NULL, having = NULL,
   schema)
 }
 \arguments{
-\item{savedlist}{a listbuilder list}
+\item{savedlist}{a listbuilder list or report}
 
 \item{table}{the table within which the flist will happen}
 
