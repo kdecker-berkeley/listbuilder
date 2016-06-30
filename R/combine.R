@@ -1,7 +1,7 @@
 #' Combine two lists via a set operator
 #' @importFrom assertthat assert_that
 #'
-#' @param block1 a listbuilder list
+#' @param block1 a listbuilder list or a listbuilder report
 #' @param block2 a listbuilder list
 #' @param operator a combination operator, one of "intersect," "union," or "minus"
 #'

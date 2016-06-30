@@ -9,3 +9,11 @@ get_cdw.listbuilder <- function(lb, dsn = "CDW2", uid = NULL, pwd = NULL,
     getcdw::get_cdw(query, dsn = dsn, uid = uid,
                     pwd = pwd, stringsAsFactors = stringsAsFactors, ...)
 }
+
+#' @export
+get_cdw.report <- function(report, dsn = "CDW2", uid = NULL, pwd = NULL,
+                           stringsAsFactors = FALSE, ...) {
+    query <- to_sql(report)
+    getcdw::get_cdw(query, dsn = dsn, uid = uid, pwd = pwd,
+                    stringsAsFactors = FALSE, ...)
+}

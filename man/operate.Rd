@@ -16,7 +16,7 @@ block1 \%or\% block2
 block1 \%minus\% block2
 }
 \arguments{
-\item{block1}{a listbuilder list}
+\item{block1}{a listbuilder list or a listbuilder report}
 
 \item{block2}{a listbuilder list}
 
