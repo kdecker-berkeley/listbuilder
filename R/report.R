@@ -19,6 +19,7 @@ get_query <- function(report) UseMethod("get_query")
 #' @export
 add_template <- function(report, template) UseMethod("add_template")
 
+#' @export
 get_id_type.report <- function(report) get_id_type(report$listbuilder)
 get_query.report <- function(report) get_query(get_template(report))
 get_query.NULL <- function(template) NULL
