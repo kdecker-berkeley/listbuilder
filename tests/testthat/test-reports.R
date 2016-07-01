@@ -21,6 +21,9 @@ test_that("report results in valid query", {
     expect_is(get_cdw(report1), "data.frame")
     expect_identical(names(get_cdw(report1)), c("entity_id", "report_name"))
 
+    report1a <- add_template(report0, template1)
+    expect_identical(report1a, report1)
+
     report2 <- add_template(report1, template2)
     expect_is(get_cdw(report2), "data.frame")
     expect_identical(names(get_cdw(report2)), c("entity_id", "report_name", "giving"))

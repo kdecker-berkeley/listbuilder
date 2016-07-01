@@ -47,7 +47,8 @@ get_template.report <- function(report) report$template
 
 #' @export
 add_template.report <- function(report, template) {
-    new_template <- add_template(get_template(report), template)
+    if (is.null(get_template(report))) new_template <- as.report_template(template)
+    else new_template <- add_template(get_template(report), template)
     structure(
         list(
             listbuilder = get_listbuilder(report),
