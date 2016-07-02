@@ -48,7 +48,11 @@ get_template.report <- function(report) report$template
 
 #' @export
 add_template.report <- function(report, template) {
-    if (is.null(get_template(report))) new_template <- as.report_template(template)
+    if (is.null(get_template(report))) {
+        new_template <- as.report_template(template)
+        if (get_id_type(new_template) != get_id_type(report))
+            stop("Id type mismatch: ", get_id_type(report), " != ", get_id_type(new_template))
+    }
     else new_template <- add_template(get_template(report), template)
     structure(
         list(
