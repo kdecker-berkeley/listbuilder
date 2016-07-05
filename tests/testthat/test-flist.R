@@ -14,6 +14,14 @@ fq <- flist_(query1,
              id_type = "entity_id",
              schema = "CDW")
 
+fq2 <- flist_(query1,
+              table = "d_entity_mv",
+              from = "entity_id",
+              to = "hh_corp_entity_id",
+              id_type = "entity_id",
+              having = quote(count(entity_id) > 1),
+              schema = "CDW")
+
 
 test_that("flist_ generates all expected components", {
 
@@ -34,4 +42,5 @@ test_that("flist_ generates all expected components", {
 
 test_that("flist_ results in valid query", {
     expect_is(get_cdw(fq), "data.frame")
+    expect_is(get_cdw(fq2), "data.frame")
 })

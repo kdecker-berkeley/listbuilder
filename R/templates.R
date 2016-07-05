@@ -9,7 +9,7 @@ and
 {{/haswhere}}
 {{{from}}} in ({{{original_query}}})
 {{#hashaving}}
-group by {{{table}}}.{{{id_field}}}
+group by {{{table}}}.{{{to}}}
 having {{{having}}}
 {{/hashaving}}
 "
