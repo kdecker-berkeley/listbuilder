@@ -64,6 +64,11 @@ add_template.report <- function(report, template) {
 }
 
 #' @export
+add_template.listbuilder <- function(lb, template) {
+    report(lb, template = template)
+}
+
+#' @export
 operate.report <- function(report, block2, operator) {
     newlb <- operate(get_listbuilder(report), block2, operator)
 
