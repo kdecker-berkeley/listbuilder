@@ -25,4 +25,3 @@ simple_q_(table, where = NULL, id_field, id_type, schema)
 \description{
 This functions provides a shorthand for queries of the form "select x from y where ..."
 }
-

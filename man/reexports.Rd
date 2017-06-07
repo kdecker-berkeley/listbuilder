@@ -2,9 +2,10 @@
 % Please edit documentation in R/get_cdw.R
 \docType{import}
 \name{reexports}
-\alias{get_cdw}
 \alias{reexports}
+\alias{get_cdw}
 \title{Objects exported from other packages}
+\keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
@@ -12,5 +13,4 @@ below to see their documentation.
 \describe{
   \item{getcdw}{\code{\link[getcdw]{get_cdw}}}
 }}
-\keyword{internal}
 

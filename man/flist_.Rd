@@ -41,4 +41,3 @@ context: \code{table = d_bio_relationship_mv},
 condition = \code{relation_type_code \%in\% c("SF", "SM", "DF", "DM"}.
 That would describe an output of IDs that are parents of the original ID list.
 }
-

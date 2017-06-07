@@ -12,4 +12,3 @@ to_sql(obj)
 \description{
 Translate a listbuilder object into SQL
 }
-

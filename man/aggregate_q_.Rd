@@ -25,4 +25,3 @@ aggregate_q_(table, id_field, id_type, where = NULL, having = NULL, schema)
 This functions provides a shorthand for queries of the form
 "select x from y where ... group by ... having ..."
 }
-
