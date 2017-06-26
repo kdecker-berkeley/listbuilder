@@ -1,7 +1,7 @@
 Package: listbuilder
 Type: Package
 Title: Prospecting tool
-Version: 0.1.8.9001
+Version: 0.1.8.9002
 Author: Tarak Shah
 Maintainer: Tarak Shah <tarak_shah@berkeley.edu>
 Description: Create composable populations of entities from a database
@@ -10,8 +10,8 @@ LazyData: TRUE
 RoxygenNote: 6.0.1
 Suggests: testthat
 Imports: assertthat,
-    dplyr,
     getcdw,
     whisker,
     lazyeval,
-    jsonlite
+    jsonlite,
+    dbplyr (>= 1.0.0)
