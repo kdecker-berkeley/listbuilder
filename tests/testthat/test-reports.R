@@ -35,6 +35,10 @@ test_that("report results in valid query", {
 
 test_that("can't add same chunk twice", {
     expect_error(add_template(add_template(lb, template1), template1), "same output")
+    rpt <- add_template(lb, template1)
+    rpt <- add_template(rpt, template2)
+    expect_error(add_template(rpt, template1), "same output")
+
 })
 
 test_that("can specify column formats", {

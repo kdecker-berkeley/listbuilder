@@ -35,8 +35,9 @@ add_template.report_template <- function(template, newtemplate, column_formats =
     if (info$id_type != get_id_type(template))
         stop("Tried to add a template with a different id_type to an existing template",
              call. = FALSE)
-    if (identical(get_query(template), list(info$query)))
-        stop("Can't add the same output chunk twice")
+    lapply(get_query(template),
+           function(tmpl) if (identical(tmpl, info$query))
+               stop("Can't add the same output chunk twice", call. = FALSE))
     structure(
         list(
             query = c(template$query, list(info$query)),
