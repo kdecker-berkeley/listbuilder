@@ -17,7 +17,7 @@ get_template <- function(report) UseMethod("get_template")
 get_query <- function(report) UseMethod("get_query")
 
 #' @export
-add_template <- function(report, template) UseMethod("add_template")
+add_template <- function(report, template, column_formats = NULL) UseMethod("add_template")
 
 #' @export
 get_id_type.report <- function(report) get_id_type(report$listbuilder)
@@ -25,12 +25,12 @@ get_query.report <- function(report) get_query(get_template(report))
 get_query.NULL <- function(template) NULL
 
 #' @export
-report <- function(listbuilder, template = NULL) {
+report <- function(listbuilder, template = NULL, column_formats = NULL) {
     if (!inherits(listbuilder, "listbuilder"))
         stop("invalid listbuilder object", call. = FALSE)
 
     if (!is.null(template)) {
-        template <- as.report_template(template)
+        template <- as.report_template(template, column_formats = column_formats)
         check_id_types(listbuilder, template)
     }
 
@@ -47,13 +47,13 @@ get_listbuilder.report <- function(report) report$listbuilder
 get_template.report <- function(report) report$template
 
 #' @export
-add_template.report <- function(report, template) {
+add_template.report <- function(report, template, column_formats = NULL) {
     if (is.null(get_template(report))) {
-        new_template <- as.report_template(template)
+        new_template <- as.report_template(template, column_formats = column_formats)
         if (get_id_type(new_template) != get_id_type(report))
             stop("Id type mismatch: ", get_id_type(report), " != ", get_id_type(new_template))
     }
-    else new_template <- add_template(get_template(report), template)
+    else new_template <- add_template(get_template(report), template, column_formats = column_formats)
     structure(
         list(
             listbuilder = get_listbuilder(report),
@@ -64,8 +64,8 @@ add_template.report <- function(report, template) {
 }
 
 #' @export
-add_template.listbuilder <- function(lb, template) {
-    report(lb, template = template)
+add_template.listbuilder <- function(lb, template, column_formats = NULL) {
+    report(lb, template = template, column_formats = column_formats)
 }
 
 #' @export

@@ -1,10 +1,14 @@
 get_query.report_template <- function(template) template$query
+get_column_formats <- function(template) UseMethod("get_column_formats")
+get_column_formats.report_template <- function(template) attr(template, "column_formats")
+get_column_formats.report <- function(template) get_column_formats(get_template(template))
+get_column_formats.NULL <- function(template) NULL
 
-as.report_template <- function(template) UseMethod("as.report_template")
+as.report_template <- function(template, column_formats = NULL) UseMethod("as.report_template")
 
-as.report_template.report_template <- function(template) template
+as.report_template.report_template <- function(template, column_formats = NULL) template
 
-as.report_template.character <- function(template) {
+as.report_template.character <- function(template, column_formats = NULL) {
     assertthat::assert_that(assertthat::is.string(template))
     info <- extract_id_type(template)
     structure(
@@ -12,29 +16,33 @@ as.report_template.character <- function(template) {
             query = list(info$query),
             id_type = info$id_type
         ),
+        column_formats = column_formats,
         class = "report_template"
     )
 }
 
-as.report_template.connection <- function(con) {
+as.report_template.connection <- function(con, column_formats = NULL) {
     template <- paste(readLines(con), collapse = "\n")
-    as.report_template(template)
+    as.report_template(template, column_formats = column_formats)
 }
 
-as.report_template.default <- function(template)
+as.report_template.default <- function(template, column_formats = NULL)
     stop("cannot convert input to a report_template", call. = FALSE)
 
-add_template.report_template <- function(template, newtemplate) {
+add_template.report_template <- function(template, newtemplate, column_formats = NULL) {
     assertthat::assert_that(assertthat::is.string(newtemplate))
     info <- extract_id_type(newtemplate)
     if (info$id_type != get_id_type(template))
         stop("Tried to add a template with a different id_type to an existing template",
              call. = FALSE)
+    if (identical(get_query(template), list(info$query)))
+        stop("Can't add the same output chunk twice")
     structure(
         list(
             query = c(template$query, list(info$query)),
             id_type = get_id_type(template)
         ),
+        column_formats = c(get_column_formats(template), column_formats),
         class = "report_template"
     )
 }

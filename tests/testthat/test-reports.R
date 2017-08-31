@@ -32,3 +32,25 @@ test_that("report results in valid query", {
     expect_is(get_cdw(report2), "data.frame")
     expect_identical(names(get_cdw(report2)), c("entity_id", "report_name", "giving"))
 })
+
+test_that("can't add same chunk twice", {
+    expect_error(add_template(add_template(lb, template1), template1), "same output")
+})
+
+test_that("can specify column formats", {
+    rpt <- add_template(
+        lb,
+        "select ##entity_id##, capacity_rating_code from cdw.d_entity_mv",
+        column_formats = list(capacity_rating_code = as.integer))
+
+    res <- get_cdw(rpt)
+    expect_is(res$capacity_rating_code, "integer")
+})
+
+test_that("errors when column formats don't match columns", {
+    rpt <- add_template(
+        lb,
+        "select ##entity_id##, capacity_rating_code from cdw.d_entity_mv",
+        column_formats = list(capacity_rating = as.integer))
+    expect_error(get_cdw(rpt), "column formats")
+})
