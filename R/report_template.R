@@ -59,6 +59,14 @@ get_id_type.report_template <- function(template) {
 extract_id_type <- function(template) {
     matches <- stringr::str_match_all(template, "##([^#]+)##")
     id_type = unique(matches[[1]][,2, drop = TRUE])
+    if (length(id_type) < 1L)
+        stop("A template must have exactly one field ##highlighted##, but yours has 0",
+             call. = FALSE)
+    if (length(id_type) > 1L)
+        stop("Template can only have one field highlighted, but yours has ",
+             length(id_type), ":\n",
+             paste0(id_type, collapse = ", "),
+             call. = FALSE)
     if (!assertthat::is.string(id_type))
         stop("Found problems with the id types in your report template",
              call. = FALSE)

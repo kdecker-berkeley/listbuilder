@@ -58,3 +58,26 @@ test_that("errors when column formats don't match columns", {
         column_formats = list(capacity_rating = as.integer))
     expect_error(get_cdw(rpt), "column formats")
 })
+
+lb <- discoveryengine::has_capacity(1)
+
+test_that("Can create a report", {
+    expect_is(
+        add_template(
+            lb,
+            "select ##entity_id##, report_name from cdw.d_entity_mv"
+        ), "report")
+})
+
+test_that("Helpful error messages on mis-specified reports", {
+    expect_error(
+        add_template(
+            lb,
+            "select entity_id, report_name from cdw.d_entity_mv"
+        ), "exactly one field")
+    expect_error(
+        add_template(
+            lb,
+            "select ##entity_id##, ##report_name## from cdw.d_entity_mv"
+        ), "entity_id, report_name")
+})
