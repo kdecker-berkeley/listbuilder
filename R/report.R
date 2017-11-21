@@ -120,7 +120,7 @@ with listylisty as (
 
 {{#chunks}}
 ,{{chunkname}} as (
-{{chunk}}
+{{{chunk}}}
 )
 {{/chunks}}
 

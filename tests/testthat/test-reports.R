@@ -11,6 +11,7 @@ lb <- aggregate_q_(table = "f_transaction_detail_mv",
 
 template1 <- "select ##entity_id##, report_name from cdw.d_entity_mv"
 template2 <- "select donor_entity_id_nbr as ##entity_id##, sum(benefit_aog_credited_amt) as giving from cdw.f_transaction_detail_mv group by donor_entity_id_nbr"
+template3 <- "select ##entity_id##, report_name from cdw.d_entity_mv where entity_id >= 100"
 
 test_that("report results in valid query", {
     report0 <- report(lb)
@@ -31,6 +32,10 @@ test_that("report results in valid query", {
     report2 <- add_template(report1, template2)
     expect_is(get_cdw(report2), "data.frame")
     expect_identical(names(get_cdw(report2)), c("entity_id", "report_name", "giving"))
+
+    report3 <- add_template(report0, template3)
+    expect_is(get_cdw(report3), "data.frame")
+    expect_identical(names(get_cdw(report3)), "entity_id", "report_name")
 })
 
 test_that("can't add same chunk twice", {
