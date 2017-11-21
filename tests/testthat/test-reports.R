@@ -35,7 +35,7 @@ test_that("report results in valid query", {
 
     report3 <- add_template(report0, template3)
     expect_is(get_cdw(report3), "data.frame")
-    expect_identical(names(get_cdw(report3)), "entity_id", "report_name")
+    expect_identical(names(get_cdw(report3)), c("entity_id", "report_name"))
 })
 
 test_that("can't add same chunk twice", {
