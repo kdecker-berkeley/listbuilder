@@ -11,7 +11,15 @@ operate <- function(block1, block2, operator) UseMethod("operate")
 #' @export
 operate.listbuilder <- function(block1, block2, operator) {
     if (!inherits(block2, "listbuilder")) stop("Operation not defined")
-    assert_that(identical(get_id_type(block1), get_id_type(block2)))
+    #assert_that(identical(get_id_type(block1), get_id_type(block2)))
+
+    block1_id_type <- get_id_type(block1)
+    block2_id_type <-  get_id_type(block2)
+
+    if (block1_id_type != block2_id_type)
+        stop("cannot combine a definition of type ", block1_id_type,
+             " with a definition of type ", block2_id_type, call. = FALSE)
+
     operator <- check_operator(operator)
 
     structure(list(lhs = block1,
