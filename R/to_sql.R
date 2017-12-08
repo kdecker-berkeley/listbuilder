@@ -58,7 +58,41 @@ as_sql.aggregate_q <- function(lb) {
                                schema = lb$schema))
 }
 
+as_sql.custom_q <- function(lb) {
+    # load template
+    template <- custom_q_template()
 
+    # convert where conditions to sql strings
+    where <- lb$where
+    if (!is.null(where))
+        where <- r2sql(where)
+
+    haswhere <- length(where) > 0
+
+    where <- paste(where, collapse = " and ")
+
+    # convert having conditions into sql strings (note similarity to where conds)
+    having <- lb$having
+    if (!is.null(having))
+        having <- r2sql(having)
+
+    hashaving <- length(having) > 0
+    having <- paste(having, collapse = " and ")
+
+    # render template
+    whisker::whisker.render(
+        template,
+        data = list(
+            haswhere = haswhere,
+            where = where,
+            hashaving = hashaving,
+            having = having,
+            id_field = lb$id_field,
+            id_type = lb$id_type,
+            custom = lb$custom
+        )
+    )
+}
 
 #' @importFrom whisker whisker.render
 as_sql_flist <- function(lb) {

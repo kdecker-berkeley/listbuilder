@@ -34,3 +34,17 @@ having {{{having}}}
 {{/hashaving}}
 "
 }
+
+custom_q_template <- function() {
+"
+select {{{id_field}}} as {{{id_type}}}
+from ({{{custom}}})
+{{#haswhere}}
+where {{{where}}}
+{{/haswhere}}
+{{#hashaving}}
+group by {{{id_field}}}
+having {{{having}}}
+{{/hashaving}}
+"
+}
