@@ -96,6 +96,9 @@ as_sql.custom_q <- function(lb) {
 
 #' @importFrom whisker whisker.render
 as_sql_flist <- function(lb) {
+    if (get_table(lb) == "custom")
+        return(as_sql_custom_flist(lb))
+
     # load template
     template <- flist_template()
 
@@ -133,6 +136,49 @@ as_sql_flist <- function(lb) {
                        schema = lb$schema
                    ))
 }
+
+as_sql_custom_flist <- function(lb) {
+    # load template
+    template <- custom_flist_template()
+
+    # the subquery to be flisted
+    original_query <- as_sql(get_rhs(lb))
+
+    # convert where conditions to sql strings
+    where <- lb$where
+    if (!is.null(where))
+        where <- r2sql(where)
+
+    haswhere <- length(where) > 0
+    where <- paste(where, collapse = " and ")
+
+    # convert having conditions to sql strings
+    having <- lb$having
+    if (!is.null(having))
+        having <- r2sql(having)
+
+    hashaving <- length(having) > 0
+    having <- paste(having, collapse = " and ")
+
+    # render the template
+    whisker::whisker.render(
+        template,
+        data = list(
+            id_type = get_id_type(lb),
+            custom = lb$custom,
+            table = lb$table,
+            from = lb$from,
+            to = lb$to,
+            haswhere = haswhere,
+            where = where,
+            hashaving = hashaving,
+            having = having,
+            original_query = original_query,
+            schema = lb$schema
+        ))
+}
+
+
 
 #' @importFrom whisker whisker.render
 as_sql_compound <- function(lb) {

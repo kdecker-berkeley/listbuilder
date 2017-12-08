@@ -48,3 +48,20 @@ having {{{having}}}
 {{/hashaving}}
 "
 }
+
+custom_flist_template <- function() {
+    "
+select {{{to}}} as {{{id_type}}}
+from ({{{custom}}})
+where
+{{#haswhere}}
+{{{where}}}
+and
+{{/haswhere}}
+{{{from}}} in ({{{original_query}}})
+{{#hashaving}}
+group by {{{to}}}
+having {{{having}}}
+{{/hashaving}}
+"
+}
