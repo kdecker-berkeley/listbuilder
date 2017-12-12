@@ -16,7 +16,7 @@ idlist <- function(ids, id_type = "entity_id", quoted = F) {
             as_sql = as_sql,
             table = "manual",
             having = NULL,
-            where = list(as.call(list(quote(`%in%`), id_type, ids))),
+            where = list(as.call(list(quote(`%in%`), as.name(id_type), ids))),
             schema = NULL,
             ids = ids
         )
