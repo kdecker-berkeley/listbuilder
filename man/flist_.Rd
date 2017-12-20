@@ -5,7 +5,7 @@
 \alias{flist_}
 \title{Convert a list of Ids to a new list of a possibly different type}
 \usage{
-custom_flist(savedlist, custom, id_field, id_type, where = NULL,
+custom_flist(savedlist, custom, from, to, id_type, where = NULL,
   having = NULL)
 
 flist_(savedlist, table, from, to, id_type, where = NULL, having = NULL,
@@ -14,6 +14,10 @@ flist_(savedlist, table, from, to, id_type, where = NULL, having = NULL,
 \arguments{
 \item{savedlist}{a listbuilder list or report}
 
+\item{from}{the origin ID field}
+
+\item{to}{the destination ID field}
+
 \item{id_type}{the id_type of the new listbuilder object}
 
 \item{where}{any pre-aggregation conditions (lazy_dots)}
@@ -21,10 +25,6 @@ flist_(savedlist, table, from, to, id_type, where = NULL, having = NULL,
 \item{having}{any post-aggregation conditions (lazy_dots)}
 
 \item{table}{the table within which the flist will happen}
-
-\item{from}{the origin ID field}
-
-\item{to}{the destination ID field}
 
 \item{schema}{"CDW" by default, no need to change it}
 
