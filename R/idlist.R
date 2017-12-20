@@ -1,9 +1,10 @@
 #' @export
 idlist <- function(ids, id_type = "entity_id", quoted = F) {
-    if (quoted) ids <- paste0("'", ids, "'")
+    if (quoted) useids <- paste0("'", ids, "'")
+    else useids <- ids
 
     as_sql <- paste0(
-        "select ", ids, " as ", id_type, " from dual",
+        "select ", useids, " as ", id_type, " from dual",
         collapse = "\nunion\n"
     )
     as_sql <- paste0("(", as_sql, ")")
