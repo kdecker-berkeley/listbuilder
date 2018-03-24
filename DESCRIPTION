@@ -1,7 +1,7 @@
 Package: listbuilder
 Type: Package
 Title: Prospecting tool
-Version: 0.1.14
+Version: 0.1.15
 Author: Tarak Shah
 Maintainer: Tarak Shah <tarak_shah@berkeley.edu>
 Description: Create composable populations of entities from a database
