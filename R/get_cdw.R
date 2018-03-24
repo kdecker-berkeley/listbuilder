@@ -18,7 +18,13 @@ get_cdw.report <- function(report, ...) {
 
 reformat_columns <- function(res, column_formats) {
     if (length(column_formats) == 0L) return(res)
-    cols_to_modify <- names(column_formats)
+
+    # convert to lower case: sql case-insensitive and our database returns
+    # all columns as uppercase, regardless of what the query says,
+    # we convert everything to lower case b/c it's easier to look at. so
+    # column formatter names (which have to match column names) should always
+    # be lower case
+    cols_to_modify <- tolower(names(column_formats))
 
     if (length(cols_to_modify[cols_to_modify != ""]) != length(column_formats))
         stop("All column_formats must be named")
@@ -30,7 +36,7 @@ reformat_columns <- function(res, column_formats) {
     for (i in seq_along(column_formats)) {
         res <- dplyr::mutate_at(
             res,
-            .vars = names(column_formats)[[i]],
+            .vars = cols_to_modify[[i]],
             .funs = column_formats[[i]]
         )
     }
