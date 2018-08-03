@@ -1,4 +1,7 @@
+#' @export
 get_operator <- function(lb) UseMethod("get_operator")
+
+#' @export
 get_operator.listbuilder <- function(lb) {
     lb$operator
 }
