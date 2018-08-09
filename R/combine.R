@@ -30,7 +30,7 @@ operate.listbuilder <- function(block1, block2, operator) {
 }
 
 check_operator <- function(operator) {
-    stopifnot(operator %in% c("intersect", "union", "minus"))
+    stopifnot(operator %in% c("intersect", "union", "minus", "union all"))
     operator
 }
 
@@ -40,7 +40,7 @@ check_operator <- function(operator) {
 
 #' @rdname operate
 #' @export
-`%or%` <- function(block1, block2) operate(block1, block2, "union")
+`%or%` <- function(block1, block2) operate(block1, block2, "union all")
 
 #' @rdname operate
 #' @export

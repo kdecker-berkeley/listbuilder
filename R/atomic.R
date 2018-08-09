@@ -1,6 +1,6 @@
 is_atomic <- function(lb) UseMethod("is_atomic")
 is_atomic.listbuilder <- function(lb) {
-    !any(get_operator(lb) %in% c("intersect", "union", "minus"))
+    !any(get_operator(lb) %in% c("intersect", "union", "minus", "union all"))
 }
 
 is_flist <- function(lb) UseMethod("is_flist")
