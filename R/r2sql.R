@@ -4,6 +4,6 @@ r2sql <- function(x) {
     # } else {
     #     outp <- dplyr::translate_sql_q(x, window = FALSE)
     # }
-    outp <- dbplyr::translate_sql_(x, window = FALSE)
+    outp <- dbplyr::translate_sql(x, window = FALSE)
     unquote(outp)
 }
