@@ -1,6 +1,6 @@
 sql_data_mask <- function(expr, variant, con, window = FALSE,
                           strict = getOption("dplyr.strict_sql", FALSE)) {
-    stopifnot(is.sql_variant(variant))
+    stopifnot(dbplyr:::is.sql_variant(variant))
 
     # Default for unknown functions
     unknown <- setdiff(all_calls(expr), names(variant))
