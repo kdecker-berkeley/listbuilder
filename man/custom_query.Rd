@@ -22,6 +22,6 @@ This functions provides a shorthand for queries of the form
 "select x from (standalone-query) where ... group by ... having ..."
 }
 \details{
-This function is similar to \code{\link{aggregate_q}} except
+This function is similar to aggregate_q except
 the source is not constrained to being a single table, it can be any query.
 }
