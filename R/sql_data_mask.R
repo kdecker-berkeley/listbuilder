@@ -5,7 +5,7 @@ sql_data_mask <- function(expr, variant, con, window = FALSE,
     # Default for unknown functions
     unknown <- setdiff(dbplyr:::all_calls(expr), names(variant))
     op <- if (strict) dbplyr:::missing_op else dbplyr:::default_op
-    top_env <- dbplyr:::ceply(unknown, op, parent = rlang::empty_env(), env = rlang::get_env(expr))
+    top_env <- dbplyr:::ceply(unknown, op, parent = rlang::empty_env(), env = rlang::get_env(toString(expr)))
 
     # Known R -> SQL functions
     special_calls <- dbplyr:::copy_env(variant$scalar, parent = top_env)
