@@ -32,7 +32,7 @@ sql_data_mask <- function(expr, variant, con, window = FALSE,
         }
     }
     names <- dbplyr:::all_names(expr)
-    idents <- lapply(names, ident)
+    idents <- lapply(names, dbplyr::ident)
     name_env <-  dbplyr:::ceply(idents, dbplyr::escape, con = con, parent = special_calls2)
 
     # Known sql expressions
