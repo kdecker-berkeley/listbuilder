@@ -7,11 +7,12 @@ Maintainer: Tarak Shah <tarak_shah@berkeley.edu>
 Description: Create composable populations of entities from a database
 License: MIT + file LICENSE
 LazyData: TRUE
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.2
 Suggests: testthat
 Imports: assertthat,
     getcdw,
     whisker,
     lazyeval,
     jsonlite,
+    rlang,
     dbplyr (>= 1.0.0)

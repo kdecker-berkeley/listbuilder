@@ -5,11 +5,18 @@
 \alias{flist_}
 \title{Convert a list of Ids to a new list of a possibly different type}
 \usage{
-custom_flist(savedlist, custom, from, to, id_type, where = NULL,
-  having = NULL)
+custom_flist(savedlist, custom, from, to, id_type, where = NULL, having = NULL)
 
-flist_(savedlist, table, from, to, id_type, where = NULL, having = NULL,
-  schema)
+flist_(
+  savedlist,
+  table,
+  from,
+  to,
+  id_type,
+  where = NULL,
+  having = NULL,
+  schema
+)
 }
 \arguments{
 \item{savedlist}{a listbuilder list or report}

@@ -4,7 +4,7 @@ r2sql <- function(x) {
     # } else {
     #     outp <- dplyr::translate_sql_q(x, window = FALSE)
     # }
-    outp <- dbplyr::translate_sql_(x, window = FALSE, con = dbplyr:: simulate_dbi())
+    outp <- translate_sql_(x, window = FALSE, con = dbplyr:: simulate_dbi())
     outp = gsub("`", "", outp)
     unquote(outp)
 }
