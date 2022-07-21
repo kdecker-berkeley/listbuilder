@@ -35,5 +35,5 @@ translate_sql_ <- function(dots, con = NULL, vars_group = NULL, vars_order = NUL
             dbplyr::escape(toString(rlang::eval_tidy(x, mask)), con = con)
         }
     })
-    sql(unlist(pieces))
+    dbplyr::sql(unlist(pieces))
 }
