@@ -32,6 +32,7 @@ translate_sql_ <- function(dots, con = NULL, vars_group = NULL, vars_order = NUL
         }
         else {
             mask <- sql_data_mask(x, variant, con = con, window = window)
+            x <- lapply(x, deparse)
             dbplyr::escape((rlang::eval_tidy(x, mask)), con = con)
         }
     })
